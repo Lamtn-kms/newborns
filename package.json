@@ -1,0 +1,26 @@
+{
+  "name": "playwright-newborns",
+  "version": "1.0.0",
+  "description": "Playwright E2E test framework for Newborns Learning System",
+  "scripts": {
+    "test": "playwright test",
+    "test:qa": "dotenv -e .env.qa -- playwright test",
+    "test:staging": "dotenv -e .env.staging -- playwright test",
+    "test:headed": "playwright test --headed",
+    "test:report": "playwright show-report",
+    "setup": "playwright test --project=setup"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@playwright/mcp": "^0.0.68",
+    "@playwright/test": "^1.58.2",
+    "@types/crypto-js": "^4.2.2",
+    "@types/node": "^25.4.0",
+    "crypto-js": "^4.2.0",
+    "dotenv": "^17.3.1",
+    "ts-node": "^10.9.2",
+    "typescript": "^5.9.3"
+  }
+}
