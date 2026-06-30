@@ -22,7 +22,7 @@ function generateRandomString() {
  * This function creates a string consisting of 8 randomly selected characters from the English alphabet
  * (both uppercase and lowercase) and numeric digits (0-9).
  */
-function generateRandomAlphanumericString() {
+export function generateRandomAlphanumericString() {
   const charactersAndNumbers = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
   let value = '';
   for (let i = 0; i < 8; i++) {

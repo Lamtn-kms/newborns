@@ -1,6 +1,9 @@
 import CryptoJS from 'crypto-js';
 
-const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY ?? 'default-secret-key';
+if (!process.env.ENCRYPTION_KEY) {
+  throw new Error('ENCRYPTION_KEY environment variable is not set. Check your .env file.');
+}
+const ENCRYPTION_KEY = process.env.ENCRYPTION_KEY;
 
 /**
  * Encrypts a plain-text string.

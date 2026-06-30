@@ -83,7 +83,7 @@ Setup (login) → Test Specs → Teardown (cleanup)
 - Custom Fixtures (dependency injection)
 - Setup/Teardown Projects (auth state management)
 - Encrypted test data (AES via CryptoJS)
-- Tag-based test filtering (@Smoke, @Regression)
+<!-- - Tag-based test filtering (@Smoke, @Regression) -->
 
 ## Test Cases
 

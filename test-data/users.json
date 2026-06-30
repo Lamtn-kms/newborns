@@ -1,10 +1,10 @@
 {
-  "admin": {
-    "email": "superadmin@newborns.com",
-    "password": "U2FsdGVkX1+RsIfp4l6goiErw+yXUZl3mdhxtdiaCBo="
-  },
   "invalid": {
     "email": "invalid@newborns.com",
-    "password": "U2FsdGVkX18WgAwsD+FbjwSTr6qpBYkvC1U8PNooKXU="
+    "password": "WrongPassword123"
+  },
+  "emptyFields": {
+    "email": "",
+    "password": ""
   }
 }

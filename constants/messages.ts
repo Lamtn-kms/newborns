@@ -3,4 +3,5 @@ export const MESSAGES = {
   REQUIRED: 'Required',
   DASHBOARD_TITLE: 'Dashboard',
   LOGIN_TITLE: 'Login',
+  USER_UPDATED: 'has been updated.',
 };

@@ -1,6 +1,7 @@
 import { test, expect } from './base';
 import { MESSAGES } from '../constants/messages';
 import users from '../test-data/users.json';
+import { AppConfig } from '../utils/app-config';
 import { decryptTestData } from '../utils/data-utils';
 
 test.describe('Login Page @Login', () => {
@@ -12,8 +13,8 @@ test.describe('Login Page @Login', () => {
     });
 
     await test.step('Login with admin credentials', async () => {
-      await loginPage.fillEmail(users.admin.email);
-      await loginPage.fillPassword(decryptTestData(users.admin.password));
+      await loginPage.fillEmail(AppConfig.adminEmail);
+      await loginPage.fillPassword(decryptTestData(AppConfig.adminPassword));
       await loginPage.clickLogin();
     });
 
@@ -30,7 +31,7 @@ test.describe('Login Page @Login', () => {
 
     await test.step('Login with invalid credentials', async () => {
       await loginPage.fillEmail(users.invalid.email);
-      await loginPage.fillPassword(decryptTestData(users.invalid.password));
+      await loginPage.fillPassword(users.invalid.password);
       await loginPage.clickLogin();
     });
 
@@ -94,25 +95,22 @@ test.describe('Home Page @HomePage', () => {
 });
 
 test.describe('API Tests @API', () => {
-  test('API: Get sidebar menu links from page', { tag: ['@Regression'] }, async ({ page }) => {
-    await test.step('Navigate to home and extract sidebar menu', async () => {
-      await page.goto('/');
-      await page.waitForLoadState('networkidle');
+  test('API: Get sidebar menu links from page', { tag: ['@Regression'] }, async ({ homePage, menuComponent }) => {
+    await test.step('Navigate to home page', async () => {
+      await homePage.navigate();
+      await homePage.isHomePageVisible();
+    });
 
-      const menuLinks = await page.locator('ul a, nav a, [role="list"] a').evaluateAll(
-        (links) => links.map((link) => ({
-          text: link.textContent?.trim() || '',
-          href: link.getAttribute('href') || '',
-        }))
-      );
-
-      console.log('Sidebar Menu Links:', JSON.stringify(menuLinks, null, 2));
-      expect(menuLinks.length).toBeGreaterThan(0);
-
-      const expectedPaths = ['/profile/home', '/user-management', '/course-management', '/course-center-management'];
-      for (const path of expectedPaths) {
-        const found = menuLinks.some(link => link.href.includes(path));
-        expect(found, `Expected menu link with path: ${path}`).toBe(true);
+    await test.step('Verify sidebar menu contains expected links', async () => {
+      const expectedLinks = [
+        '/profile/home',
+        '/user-management',
+        '/course-management',
+        '/course-center-management',
+      ];
+      for (const href of expectedLinks) {
+        const isPresent = await menuComponent.isMenuLinkPresent(href);
+        expect(isPresent, `Expected menu link with href: ${href}`).toBe(true);
       }
     });
   });
